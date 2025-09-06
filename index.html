@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Homepage</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: no-repeat center center/cover;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      transition: background 0.8s ease-in-out;
+    }
+
+    .overlay {
+      background: rgba(0,0,0,0.6);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
+
+    .clock {
+      font-size: 60px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .greeting {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .search-box input {
+      padding: 12px;
+      width: 400px;
+      border: none;
+      border-radius: 25px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .links {
+      margin-top: 30px;
+    }
+
+    .links a {
+      margin: 0 12px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      background: rgba(255,255,255,0.1);
+      padding: 8px 16px;
+      border-radius: 12px;
+      transition: background 0.3s;
+    }
+
+    .links a:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .quote {
+      margin-top: 40px;
+      font-size: 18px;
+      font-style: italic;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  
+  <div class="clock" id="clock"></div>
+  <div class="greeting" id="greeting">Hello!</div>
+  
+  <div class="search-box">
+    <form action="https://www.google.com/search" method="GET">
+      <input type="text" name="q" placeholder="Search Google...">
+    </form>
+  </div>
+
+  <div class="links">
+    <a href="https://www.crunchyroll.com" target="_blank">Crunchyroll</a>
+    <a href="https://myanimelist.net" target="_blank">MyAnimeList</a>
+    <a href="https://anilist.co" target="_blank">AniList</a>
+  </div>
+
+  <div class="quote" id="quote"></div>
+
+  <script>
+    // Clock
+    function updateClock() {
+      const now = new Date();
+      let h = now.getHours();
+      let m = now.getMinutes();
+      if(m < 10) m = "0" + m;
+      document.getElementById("clock").textContent = h + ":" + m;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Greeting
+    const hour = new Date().getHours();
+    let greet = "Hello!";
+    if (hour < 12) greet = "Good Morning, Senpai!";
+    else if (hour < 18) greet = "Good Afternoon!";
+    else greet = "Good Evening!";
+    document.getElementById("greeting").textContent = greet;
+
+    // Random anime quotes
+    const quotes = [
+      "A lesson without pain is meaningless. – Fullmetal Alchemist",
+      "A lesson in chasing dreams. – Naruto",
+      "Fear is not evil. It tells you what your weakness is. – Fairy Tail",
+      "Power comes in response to a need, not a desire. – Dragon Ball Z",
+      "No matter how deep the night, it always turns to day. – One Piece"
+    ];
+    document.getElementById("quote").textContent =
+      quotes[Math.floor(Math.random() * quotes.length)];
+
+    // Daily wallpapers
+    const wallpapers = [
+      "https://wallpapercave.com/wp/wp6591197.jpg", // Monday
+      "https://wallpapercave.com/wp/wp4042373.jpg", // Tuesday
+      "https://wallpapercave.com/wp/wp1819026.jpg", // Wednesday
+      "https://wallpapercave.com/wp/wp5732302.jpg", // Thursday
+      "https://wallpapercave.com/wp/wp6117543.jpg", // Friday
+      "https://wallpapercave.com/wp/wp5160289.jpg", // Saturday
+      "https://wallpapercave.com/wp/wp6980460.jpg"  // Sunday
+    ];
+    const day = new Date().getDay(); // 0 = Sunday, 6 = Saturday
+    document.body.style.backgroundImage = `url('${wallpapers[day]}')`;
+  </script>
+</body>
+</html>
